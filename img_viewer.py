@@ -29,7 +29,7 @@ image_viewer_column = [
 layout = [
     [
         sg.Column(file_list_column),
-        sg.VSeparator(),
+        sg.VerticalSeparator(),
         sg.Column(image_viewer_column),
     ]
 ]
@@ -54,7 +54,7 @@ while True:
             f
             for f in file_list
             if os.path.isfile(os.path.join(folder, f))
-            and f.lower().endswith((".png", ".gif"))
+            and f.lower().endswith((".png", ".gif", ".jpg", ".jpeg"))
         ]
         window["-FILE LIST-"].update(fnames)
     elif event == "-FILE LIST-": #A file was chosen
