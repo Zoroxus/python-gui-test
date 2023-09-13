@@ -22,6 +22,8 @@ import PySimpleGUI as sg
 points = 0
 build1 = 0
 buildcost1 = 10
+build2 = 0
+buildcost2 = 100
 
 def long_operation_thread(window):
     """
@@ -35,8 +37,10 @@ def long_operation_thread(window):
     global added
     global build1
     global buildcost1
+    global build2
+    global buildcost2
     while True:
-        added=build1
+        added=build1+10*build2
         points+=added
         time.sleep(1)
 
@@ -50,14 +54,19 @@ def the_gui():
     global points
     global build1
     global buildcost1
+    global build2
+    global buildcost2
 
     sg.theme('Light Brown 3')
 
-    layout = [[sg.Text('0', key="-POINTS-")],
+    layout = [[sg.Text("Epi-points :"),sg.Text('0', key="-POINTS-")],
               [sg.Button("CLICK")],
-              [sg.Text("Building 1  |"),sg.Text(buildcost1, key="-TEXT1-")],
+              [sg.Text("École primaire  |"),sg.Text(buildcost1, key="-TEXT1-")],
               [sg.Text('0', key="-BUILD1-")],
-              [sg.Button("BUY")],
+              [sg.Button("Construire une École Primaire")],
+              [sg.Text("Collège  |"),sg.Text(buildcost2, key="-TEXT2-")],
+              [sg.Text('0', key="-BUILD2-")],
+              [sg.Button("Construire un Collège")],
               [sg.Button('Click Me I Do Nothing !'), sg.Button('Exit')],
     ]
 
@@ -77,15 +86,22 @@ def the_gui():
             break
         if event == 'CLICK':
             points+=1
-        if event == 'BUY':
+        if event == 'Construire une École Primaire':          #BUILD1
             if points>=buildcost1:
                 build1+=1
                 points-=buildcost1
                 buildcost1+=build1*2
                 window["-TEXT1-"].update(buildcost1)
+        if event == 'Construire un Collège':          #BUILD2
+            if points>=buildcost2:
+                build2+=1
+                points-=buildcost2
+                buildcost2+=build2*20
+                window["-TEXT2-"].update(buildcost2)
         bct1=str(buildcost1)
         #window["-TEXT1-"].update('Building 1 | Cost : ',bct1)
         window["-BUILD1-"].update(build1)
+        window["-BUILD2-"].update(build2)
         # --------- Display timer in window --------
         window['-POINTS-'].update(points)
 
