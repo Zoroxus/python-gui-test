@@ -2,7 +2,6 @@
 import time
 import PySimpleGUI as sg
 
-
 """
     Demo Program - Multithreaded Long Tasks GUI
     
@@ -19,6 +18,7 @@ import PySimpleGUI as sg
          
     Copyright 2022 PySimpleGUI
 """
+
 points = 0
 build1 = 0
 buildcost1 = 10
